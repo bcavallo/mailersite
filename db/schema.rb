@@ -13,15 +13,15 @@
 
 ActiveRecord::Schema.define(version: 20141212180309) do
 
-  create_table "messages", force: true do |t|
+  create_table "messages", force: :cascade do |t|
     t.text     "message"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "users", force: true do |t|
-    t.string   "name"
-    t.string   "email"
+  create_table "users", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "email",      limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
