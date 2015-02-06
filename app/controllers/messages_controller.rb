@@ -63,7 +63,7 @@ class MessagesController < ApplicationController
   end
 
   def send_message
-    UserMailer.message_email().deliver
+    UserMailer.message_email().deliver_now
     redirect_to "/messages"
   end
 
