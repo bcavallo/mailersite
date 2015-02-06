@@ -1,6 +1,7 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :edit, :update, :destroy]
 
+
   # GET /messages
   # GET /messages.json
   def index
@@ -17,9 +18,11 @@ class MessagesController < ApplicationController
     @message = Message.new
   end
 
+=begin
   # GET /messages/1/edit
   def edit
   end
+=end
 
   # POST /messages
   # POST /messages.json
@@ -28,9 +31,9 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
       if @message.save
-        format.html { redirect_to @message, notice: 'Message was successfully created.' }
+        format.html { redirect_to @message, notice: 'Message successfully sent.' }
         format.json { render :show, status: :created, location: @message }
-        UserMailer.message_email()
+        UserMailer.message_email(@message).deliver_now
       else
         format.html { render :new }
         format.json { render json: @message.errors, status: :unprocessable_entity }
@@ -38,6 +41,7 @@ class MessagesController < ApplicationController
     end
   end
 
+=begin
   # PATCH/PUT /messages/1
   # PATCH/PUT /messages/1.json
   def update
@@ -66,6 +70,7 @@ class MessagesController < ApplicationController
     UserMailer.message_email().deliver_now
     redirect_to "/messages"
   end
+=end
 
   private
     # Use callbacks to share common setup or constraints between actions.
