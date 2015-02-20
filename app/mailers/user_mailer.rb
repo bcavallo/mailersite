@@ -3,7 +3,7 @@ class UserMailer < ActionMailer::Base
 
   def message_email(message)
     @message = message
-    @user = User.offset(rand(User.count)).first
-    mail(to: @user.email, subject: "Here's a friendly message!")
+    @recep = User.offset(rand(User.count)).first
+    mail(to: @recep.email, subject: "Here's a friendly message!")
   end
 end
