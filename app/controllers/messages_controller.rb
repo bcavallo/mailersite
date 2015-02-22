@@ -29,17 +29,15 @@ class MessagesController < ApplicationController
   def create
     @message = Message.new(message_params)
 
-    respond_to do |format|
       if @message.valid?
-        format.html { redirect_to @message, notice: 'Message successfully sent.' }
-        format.json { render :show, status: :created, location: @message }
         UserMailer.message_email(current_user, @message).deliver_now
+        flash[:success] = "Message sent!"
+        render 'new'
       else
         format.html { render :new }
         format.json { render json: @message.errors, status: :unprocessable_entity }
       end
     end
-  end
 
 =begin
   # PATCH/PUT /messages/1
