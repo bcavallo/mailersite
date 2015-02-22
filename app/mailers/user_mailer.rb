@@ -1,9 +1,13 @@
 class UserMailer < ActionMailer::Base
   default from: "brencavallo@gmail.com"
 
-  def message_email(message)
+  def message_email(user, message)
     @message = message
-    @recep = User.offset(rand(User.count)).first
+    @user = user
+    @recep = user
+    while @recep == user 
+      @recep = User.offset(rand(User.count)).first
+    end
     mail(to: @recep.email, subject: "Here's a friendly message!")
   end
 end

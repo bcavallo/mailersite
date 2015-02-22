@@ -1,4 +1,7 @@
 class SessionsController < ApplicationController
+  
+  skip_before_filter :require_login
+
   def new
   end
 
@@ -6,7 +9,7 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
       log_in user
-      redirect_to root_path 
+      redirect_to '/messages' 
       flash.now[:success] = 'You are now logged in!'
     else
       flash.now[:danger] = 'Invalid email/password combination'

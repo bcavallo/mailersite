@@ -30,10 +30,10 @@ class MessagesController < ApplicationController
     @message = Message.new(message_params)
 
     respond_to do |format|
-      if @message.save
+      if @message.valid?
         format.html { redirect_to @message, notice: 'Message successfully sent.' }
         format.json { render :show, status: :created, location: @message }
-        UserMailer.message_email(@message).deliver_now
+        UserMailer.message_email(current_user, @message).deliver_now
       else
         format.html { render :new }
         format.json { render json: @message.errors, status: :unprocessable_entity }
