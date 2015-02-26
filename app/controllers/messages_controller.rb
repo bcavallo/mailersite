@@ -18,11 +18,11 @@ class MessagesController < ApplicationController
     @message = Message.new
   end
 
-=begin
+
   # GET /messages/1/edit
   def edit
   end
-=end
+
 
   # POST /messages
   # POST /messages.json
@@ -39,7 +39,6 @@ class MessagesController < ApplicationController
       end
     end
 
-=begin
   # PATCH/PUT /messages/1
   # PATCH/PUT /messages/1.json
   def update
@@ -68,7 +67,6 @@ class MessagesController < ApplicationController
     UserMailer.message_email().deliver_now
     redirect_to "/messages"
   end
-=end
 
   private
     # Use callbacks to share common setup or constraints between actions.
